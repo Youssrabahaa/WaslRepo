@@ -1,0 +1,27 @@
+﻿using ClinicMatch.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace phase_1.Data
+{
+    public class AppDbContext : DbContext
+    {   
+        public AppDbContext()
+        {
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer(
+                    "Server=DESKTOP-OSMEIU4\\SQLEXPRESS;Database=First_Phase_DB;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=true");
+            }
+        }
+
+        public DbSet<User> Users { get; set; }
+        public DbSet<OtpCode> OtpCodes { get; set; }
+        public DbSet<PatientProfile> PatientProfiles { get; set; }
+    }
+}

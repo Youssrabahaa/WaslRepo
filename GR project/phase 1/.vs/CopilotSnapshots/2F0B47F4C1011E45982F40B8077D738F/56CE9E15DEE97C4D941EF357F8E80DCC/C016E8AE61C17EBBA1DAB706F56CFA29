@@ -1,0 +1,23 @@
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+
+namespace ClinicMatch.Domain.Entities;
+
+[Index(nameof(MatchId), IsUnique = true)]
+public class Conversation
+{
+    [Key]
+    public int Id { get; set; }
+
+    [Required]
+    public int MatchId { get; set; }
+
+    [Required]
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+    public DateTime? LastMessageAt { get; set; }
+
+    public Match Match { get; set; } = default!;
+
+    public List<Message> Messages { get; set; }
+}
